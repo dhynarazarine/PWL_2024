@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ItemController;
+// mengimpor kelas ItemController dari namespace, kita bisa menggunakan ItemController dalam file routing Laravel
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +18,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::resource('items', ItemController::class);
+// Route::resource metode yang secara otomatis berdasarkan metode yang ada di ItemController
