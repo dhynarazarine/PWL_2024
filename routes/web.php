@@ -1,7 +1,14 @@
 <?php
 
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\PageController;
+use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\PhotoController;
+
 // mengimpor kelas ItemController dari namespace, kita bisa menggunakan ItemController dalam file routing Laravel
 
 /*
@@ -23,21 +30,18 @@ Route::resource('items', ItemController::class);
 // Route::resource metode yang secara otomatis berdasarkan metode yang ada di ItemController
 
 // Route Hello
-Route::get('/hello', function () {
-        return 'Hello World';
-});
+Route::get('/hello', [WelcomeController::class,'hello']);
+
 // Route World
 Route::get('/world', function () {
         return 'World';
 });
-// Route '/'
-Route::get('/', function () {
-        return 'Selamat Datang';
-});
+
+// Route '/
+// Route::get('/', [PageController::class,'index']);
+
 // Route about
-Route::get('/about', function () {
-        return 'NIM : 2341760109, Nama : Queenadhynar Azarine Dwipa Andiyani';
-});
+// Route::get('/about', [PageController::class, 'about']);
 
 
 // Route username
@@ -51,11 +55,25 @@ Route::get('/posts/{post}/comments/{comment}', function ($postId, $commentId) {
 });
 
 // Route Halaman Artikel
-Route::get('/articles/{id}', function ($id) {
-        return 'Halaman Artikel dengan ID '.$id;
-  });
+// Route::get('/articles/{id}',[PageController::class, 'articles']);
 
 // Route User
 Route::get('/user/{name?}', function ($name="John") {
         return 'Nama saya  '.$name;
   });
+
+
+// Route dengan Single Action Controller
+// Route '/
+Route::get('/', [HomeController::class,'index']);
+// Route about
+Route::get('/about', [AboutController::class, 'about']);
+// Route Halaman Artikel
+Route::get('/articles/{id}',[ArticleController::class, 'articles']);
+
+// Resource Controller
+Route::resource('photos', PhotoController::class);
+
+Route::resource('photos', PhotoController::class)->only(['index', 'show']);
+Route::resource('photos', PhotoController::class)->except(['create', 'store', 'update', 'destroy']);
+       
