@@ -65,7 +65,7 @@ Route::get('/user/{name?}', function ($name="John") {
 
 // Route dengan Single Action Controller
 // Route '/
-Route::get('/', [HomeController::class,'index']);
+// Route::get('/', [HomeController::class,'index']);
 // Route about
 Route::get('/about', [AboutController::class, 'about']);
 // Route Halaman Artikel
@@ -76,4 +76,12 @@ Route::resource('photos', PhotoController::class);
 
 Route::resource('photos', PhotoController::class)->only(['index', 'show']);
 Route::resource('photos', PhotoController::class)->except(['create', 'store', 'update', 'destroy']);
-       
+
+
+// View
+// Route '/
+// Route::get('/greeting', function () {
+//         return view('blog.hello', ['name' => 'Andi']);});
+
+Route::get('/greeting', [WelcomeController::class, 'greeting']);
+        
